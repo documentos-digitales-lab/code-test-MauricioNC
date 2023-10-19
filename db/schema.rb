@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_19_060331) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_19_173100) do
   create_table "customers", charset: "utf8mb3", force: :cascade do |t|
     t.string "rfc"
     t.datetime "created_at", null: false
@@ -24,6 +24,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_19_060331) do
     t.integer "sub_total"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "customer_id", null: false
+    t.index ["customer_id"], name: "index_products_on_customer_id"
   end
 
+  add_foreign_key "products", "customers"
 end
