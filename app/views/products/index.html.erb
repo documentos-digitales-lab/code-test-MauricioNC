@@ -1,0 +1,8 @@
+<div class="products">
+  <% @products.each do |p| %>
+    <div><%= p.quantity %></div>
+    <div><%= p.product %></div>
+    <div><%= p.unit_price %></div>
+    <div><%= p.sub_total %></div>
+  <% end %>
+</div>
