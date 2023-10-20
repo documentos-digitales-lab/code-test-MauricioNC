@@ -6,22 +6,25 @@ export default class extends Controller {
   connect() {
     this.quantityTarget.focus()
   }
-
+  
   isEmpty(param)
   {
     return param === ""
   }
-
+  
   validateEmpty({ params })
   {
-    let quantity = this.quantityTarget.value
-    let unit_price = this.unit_priceTarget.value
-   
+    const index = !!params.index ? params.index : null
+
+    let quantityValue = this.quantityTargets[index-1].value
+    let unitPriceValue = this.unit_priceTargets[index-1].value
+    
     if (!!params.quantity)
-      this.isEmpty(quantity) ? this.markInput(this.quantityTarget) : this.unmarkInput(this.quantityTarget)
+      this.isEmpty(quantityValue) ? this.markInput(this.quantityTargets[index-1]) : this.unmarkInput(this.quantityTargets[index-1])
     else if (!!params.unitPrice)
-      this.isEmpty(unit_price) ? this.markInput(this.unit_priceTarget) : this.unmarkInput(this.unit_priceTarget)
+      this.isEmpty(unitPriceValue) ? this.markInput(this.unit_priceTargets[index-1]) : this.unmarkInput(this.unit_priceTargets[index-1])
     else {}
+   
   }
   
   markInput(input)
@@ -34,12 +37,17 @@ export default class extends Controller {
     input.style.border = ""
   }
 
-  getAmount() {
-    let quantity = this.quantityTarget.value
-    let unit_price = this.unit_priceTarget.value
+  getAmount({ params }) {
+    const index = !!params.index ? params.index : null
 
-    this.amountTarget.value = !(this.isEmpty(quantity) && this.isEmpty(unit_price))
-                                ? parseInt(quantity) * parseInt(unit_price)
+    let quantityValue = this.quantityTargets[index-1].value
+    let unitPriceValue = this.unit_priceTargets[index-1].value
+
+
+    console.log(this.amountTargets[index-1]);
+
+    this.amountTargets[index-1].value = !(this.isEmpty(quantityValue) && this.isEmpty(unitPriceValue))
+                                ? parseInt(quantityValue) * parseInt(unitPriceValue)
                                 : 0
   }
 }
