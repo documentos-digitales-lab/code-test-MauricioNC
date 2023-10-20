@@ -34,7 +34,7 @@ class ProductsController < ApplicationController
 
     CreateInvoiceJob.perform_later(@customer.id, products_hash)
 
-    redirect_to invoices_path(Invoice.last), status: :created
+    redirect_to customer_invoice_path(@customer.id, Invoice.last)
   end
 
   private

@@ -1,6 +1,6 @@
 class InvoicesController < ApplicationController
-  before_action :set_invoice, only: [:index, :show]
   before_action :set_customer, only: [:index, :show]
+  before_action :set_invoice, only: [:show]
 
   def index
     @invoices = @customer.invoices
@@ -14,10 +14,10 @@ class InvoicesController < ApplicationController
   private
 
   def set_invoice
-    @invoice = Invoice.find(params[:id])
+    @invoice = @customer.invoices.where(id: params[:id]).first
   end
 
   def set_customer
-    @customer = Customer.find(@invoice.customer_id)
+    @customer = Customer.find(params[:customer_id])
   end
 end
