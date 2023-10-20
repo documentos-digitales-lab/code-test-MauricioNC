@@ -1,4 +1,4 @@
-<p>Please complete all of the steps on this page:</p>
+<p><strong>¡Welcome <%= @customer_credentials["firstName"] %> <%= @customer_credentials["lastName"] %>!</strong> please complete all of the steps on this page:</p>
 <ul>
   <%= link_to  "Create An Invoice", new_product_path(customer: params[:id]) %>
 </ul>
