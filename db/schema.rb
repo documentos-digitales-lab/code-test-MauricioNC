@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_19_232514) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_20_054100) do
   create_table "customers", charset: "utf8mb3", force: :cascade do |t|
     t.string "rfc"
     t.datetime "created_at", null: false
@@ -18,7 +18,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_19_232514) do
   end
 
   create_table "invoices", charset: "utf8mb3", force: :cascade do |t|
-    t.integer "amount"
     t.integer "sub_total"
     t.integer "tax"
     t.integer "total"
