@@ -17,12 +17,12 @@ class ProductsController < ApplicationController
   end
 
   def create
-    products_hash = []
+    @products_hash = []
 
     params[:products].each do |param|
       @product = @customer.products.new(product_params(param))
 
-      products_hash.push(@product)
+      @products_hash.push(@product)
 
       if @product.save
         flash[:notice] = "Product #{@product.product} successfully created."
@@ -32,9 +32,14 @@ class ProductsController < ApplicationController
       end
     end
 
-    CreateInvoiceJob.perform_later(@customer.id, products_hash)
+    CreateInvoiceJob.perform_later(@customer.id, @roducts_hash)
 
-    redirect_to customer_invoice_path(@customer.id, Invoice.last)
+    @invoice = Invoice.last
+
+    respond_to do |format|
+      format.html { redirect_to customers_path(@customer.id), notice: "Product was successfully created." }
+      format.turbo_stream
+    end
   end
 
   private

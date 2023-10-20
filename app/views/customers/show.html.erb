@@ -1,7 +1,17 @@
-<p><strong>¡Welcome <%= @customer_credentials["firstName"] %> <%= @customer_credentials["lastName"] %>!</strong> please complete all of the steps on this page:</p>
-<ul>
-  <%= link_to  "Create An Invoice", new_product_path(customer: params[:id]) %>
-</ul>
+<p><strong>¡Welcome <%= @customer_credentials["firstName"] %> <%= @customer_credentials["lastName"] %>!</strong></p>
+
+<div>
+  <%= link_to "Create An Invoice", 
+            new_product_path(customer: params[:id]),
+            data: { turbo_frame: dom_id(Product.new) } %>
+  
+  <%= turbo_frame_tag Product.new %>
+</div>
+  
+<div>
+  <%= turbo_frame_tag "invoice_breakdown" %>
+</div>
+
 <%= form_for(:customer, url: customer_path, method: :put) do |f| %>
   <%= f.submit "Complete Process" %>
 <% end %>

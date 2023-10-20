@@ -10,7 +10,6 @@ class CustomersController < ApplicationController
 
   def show
     @customer = Customer.find(params[:id])
-    pp @customer_credentials
   end
 
   def create

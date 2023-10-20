@@ -1,3 +1,5 @@
-<p>Please add your products and click on Create:</p>
+<%= turbo_frame_tag @product do %>
+  <p>Please add your products and click on Create:</p>
 
-<%= render 'form' %>
+  <%= render 'form', product: @product %>
+<% end %>

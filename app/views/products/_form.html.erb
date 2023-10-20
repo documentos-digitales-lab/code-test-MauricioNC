@@ -1,6 +1,6 @@
 <div data-controller="products">
   <%= form_tag products_path(customer: params[:customer]) do %>
-    <%= fields_for "products[]", @product do |f|%>
+    <%= fields_for "products[]", product do |f|%>
       <%= f.text_field :quantity, placeholder: "Quantity", data:  {
                                                                     products_target: "quantity",
                                                                     action: "focusout->products#validateEmpty change->products#validateEmpty",
@@ -40,6 +40,8 @@
                                                                       products_index_param: "2"
                                                                     }%>
     <% end %>
+
+    <%= link_to "Cancel", "#{params["customer"]} "%>
     <button type="submit" data-submit-target="createProduct">Create invoice</button>
   <% end %>
 </div>
