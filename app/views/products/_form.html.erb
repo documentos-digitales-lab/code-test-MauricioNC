@@ -1,24 +1,26 @@
 <div data-controller="products">
   <%= form_tag products_path(customer: params[:customer]) do %>
     <%= fields_for "products[]", product do |f|%>
-      <%= f.text_field :quantity, placeholder: "Quantity", data:  {
-                                                                    products_target: "quantity",
-                                                                    action: "focusout->products#validateEmpty change->products#validateEmpty",
-                                                                    products_quantity_param: "quantity",
-                                                                    products_index_param: "1" 
-                                                                  }%>
-      <%= f.text_field :product, placeholder: "Product or service", data: { products_target: "product" } %>
-      <%= f.text_field :unit_price, placeholder: "Unit price", data:  { 
-                                                                        products_target: "unit_price",
-                                                                        action: "focusout->products#validateEmpty change->products#validateEmpty",
-                                                                        products_unit_price_param: "unit_price",
-                                                                        products_index_param: "1" 
-                                                                      }%>
-      <%= f.text_field :amount, placeholder: "Amount", data:  {
-                                                                      products_target: "amount",
-                                                                      action: "focus->products#getAmount",
-                                                                      products_index_param: "1"
+      <%= turbo_frame_tag "productRow" do %>
+        <%= f.text_field :quantity, placeholder: "Quantity", data:  {
+                                                                      products_target: "quantity",
+                                                                      action: "focusout->products#validateEmpty change->products#validateEmpty",
+                                                                      products_quantity_param: "quantity",
+                                                                      products_index_param: "1" 
                                                                     }%>
+        <%= f.text_field :product, placeholder: "Product or service", data: { products_target: "product" } %>
+        <%= f.text_field :unit_price, placeholder: "Unit price", data:  { 
+                                                                          products_target: "unit_price",
+                                                                          action: "focusout->products#validateEmpty change->products#validateEmpty",
+                                                                          products_unit_price_param: "unit_price",
+                                                                          products_index_param: "1" 
+                                                                        }%>
+        <%= f.text_field :amount, placeholder: "Amount", data:  {
+                                                                  products_target: "amount",
+                                                                  action: "focus->products#getAmount",
+                                                                  products_index_param: "1"
+                                                                }%>
+      <% end %>
       <br>
 
       <%= f.text_field :quantity, placeholder: "Quantity", data:  {

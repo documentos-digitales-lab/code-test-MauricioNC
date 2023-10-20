@@ -8,6 +8,7 @@ class ProductsController < ApplicationController
       @products = nil
     end
   end
+  
   def new
     @product = Product.new()
   end
