@@ -17,18 +17,24 @@ class ProductsController < ApplicationController
   end
 
   def create
+    products_hash = []
+
     params[:products].each do |param|
       @product = @customer.products.new(product_params(param))
+
+      products_hash.push(@product)
 
       if @product.save
         flash[:notice] = "Product #{@product.product} successfully created."
       else
         flash[:error] = "Something went wrong by inserting #{@product.product}, this and the rest of products won't be created, please try again."
-        render :new, status: :unprocesable_entity
+        render :new, status: :unprocessable_entity
       end
     end
 
-    redirect_to products_path(customer: @customer.id), status: :created
+    CreateInvoiceJob.perform_later(@customer.id, products_hash)
+
+    redirect_to invoices_path(Invoice.last), status: :created
   end
 
   private
