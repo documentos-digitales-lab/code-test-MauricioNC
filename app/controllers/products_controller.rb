@@ -28,7 +28,7 @@ class ProductsController < ApplicationController
       end
     end
 
-    render products_path(customer: @customer.id), status: :created
+    redirect_to products_path(customer: @customer.id), status: :created
   end
 
   private
@@ -46,6 +46,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params(param)
-    param.permit(:quantity, :product, :unit_price, :sub_total)
+    param.permit(:quantity, :product, :unit_price, :amount)
   end
 end

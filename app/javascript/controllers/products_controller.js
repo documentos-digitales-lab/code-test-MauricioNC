@@ -43,9 +43,6 @@ export default class extends Controller {
     let quantityValue = this.quantityTargets[index-1].value
     let unitPriceValue = this.unit_priceTargets[index-1].value
 
-
-    console.log(this.amountTargets[index-1]);
-
     this.amountTargets[index-1].value = !(this.isEmpty(quantityValue) && this.isEmpty(unitPriceValue))
                                 ? parseInt(quantityValue) * parseInt(unitPriceValue)
                                 : 0
