@@ -19,11 +19,15 @@ class ProductsController < ApplicationController
 
   def create
     @products_hash = []
-
+    @products_amount_exceed = []
     params[:products].each do |param|
       @product = @customer.products.new(product_params(param))
 
       @products_hash.push(@product)
+
+      if @product.amount > 2000
+        @products_amount_exceed.push(@product.product)
+      end
 
       if @product.save
         flash[:notice] = "Product #{@product.product} successfully created."

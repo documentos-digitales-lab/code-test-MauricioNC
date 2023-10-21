@@ -1,6 +1,20 @@
 <% unless products %>
   <%= flash[:notice] %>
 <% else %>
+  
+  <% unless @products_amount_exceed.empty? %>
+    <p>Additional tax should be added</p>
+    <div>
+      <p>The next products exceeds the amount (grather than: $2000)</p>
+
+      <ul>
+        <% @products_amount_exceed.each do |p| %>
+          <li><%= p %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <div class="products">
     <table border="1">
       <thead>
