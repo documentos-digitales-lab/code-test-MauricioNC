@@ -55,3 +55,4 @@ group :test do
   gem 'shoulda-matchers'
   gem 'webmock'
 end
+gem "tailwindcss-rails", "~> 2.0"
