@@ -20,6 +20,7 @@ class ProductsController < ApplicationController
   def create
     @products_hash = []
     @products_amount_exceed = []
+
     params[:products].each do |param|
       @product = @customer.products.new(product_params(param))
 
@@ -37,7 +38,7 @@ class ProductsController < ApplicationController
       end
     end
 
-    CreateInvoiceJob.perform_later(@customer.id, @roducts_hash)
+    CreateInvoiceJob.perform_later(@customer.id, @products_hash)
 
     @invoice = Invoice.last
 

@@ -1,49 +1,80 @@
 <div data-controller="products">
   <%= form_tag products_path(customer: params[:customer]) do %>
     <%= fields_for "products[]", product do |f|%>
-      <%= turbo_frame_tag "productRow" do %>
-        <%= f.text_field :quantity, placeholder: "Quantity", data:  {
-                                                                      products_target: "quantity",
-                                                                      action: "focusout->products#validateEmpty change->products#validateEmpty",
-                                                                      products_quantity_param: "quantity",
-                                                                      products_index_param: "1" 
-                                                                    }%>
-        <%= f.text_field :product, placeholder: "Product or service", data: { products_target: "product" } %>
-        <%= f.text_field :unit_price, placeholder: "Unit price", data:  { 
-                                                                          products_target: "unit_price",
-                                                                          action: "focusout->products#validateEmpty change->products#validateEmpty",
-                                                                          products_unit_price_param: "unit_price",
-                                                                          products_index_param: "1" 
-                                                                        }%>
-        <%= f.text_field :amount, placeholder: "Amount", data:  {
-                                                                  products_target: "amount",
-                                                                  action: "focus->products#getAmount",
-                                                                  products_index_param: "1"
-                                                                }%>
-      <% end %>
-      <br>
+      <%= turbo_frame_tag "productRow", class: "flex flex-col gap-2" do %>
+        <div>
+          <%= f.text_field  :quantity,
+                          placeholder: "Quantity",
+                          data: {
+                                  products_target: "quantity",
+                                  action: "focusout->products#validateEmpty change->products#validateEmpty",
+                                  products_quantity_param: "quantity",
+                                  products_index_param: "1" 
+                                },
+                          class: "border-slate-800 focus:border-slate-800 focus:ring-0 rounded-lg"%>
+          <%= f.text_field  :product,
+                            placeholder: "Product or service",
+                            data: { products_target: "product" },
+                            class: "border-slate-800 focus:border-slate-800 focus:ring-0 rounded-lg" %>
+          <%= f.text_field  :unit_price,
+                            placeholder: "Unit price",
+                            data: { 
+                                    products_target: "unit_price",
+                                    action: "focusout->products#validateEmpty change->products#validateEmpty",
+                                    products_unit_price_param: "unit_price",
+                                    products_index_param: "1" 
+                                  },
+                            class: "border-slate-800 focus:border-slate-800 focus:ring-0 rounded-lg"%>
+          <%= f.text_field  :amount,
+                            placeholder: "Amount",
+                            data: {
+                                    products_target: "amount",
+                                    action: "focus->products#getAmount",
+                                    products_index_param: "1"
+                                  },
+                            class: "border-slate-800 focus:border-slate-800 focus:ring-0 rounded-lg"%>
+        </div>
 
-      <%= f.text_field :quantity, placeholder: "Quantity", data:  {
-                                                                    products_target: "quantity",
-                                                                    action: "focusout->products#validateEmpty change->products#validateEmpty",
-                                                                    products_quantity_param: "quantity",
-                                                                    products_index_param: "2" 
-                                                                  }%>
-      <%= f.text_field :product, placeholder: "Product or service", data: { products_target: "product" } %>
-      <%= f.text_field :unit_price, placeholder: "Unit price", data:  { 
-                                                                        products_target: "unit_price",
-                                                                        action: "focusout->products#validateEmpty change->products#validateEmpty",
-                                                                        products_unit_price_param: "unit_price",
-                                                                        products_index_param: "2"  
-                                                                      }%>
-      <%= f.text_field :amount, placeholder: "Amount", data:  {
-                                                                      products_target: "amount",
-                                                                      action: "focus->products#getAmount",
-                                                                      products_index_param: "2"
-                                                                    }%>
+        <div>
+          <%= f.text_field  :quantity,
+                        placeholder: "Quantity",
+                        data: {
+                                products_target: "quantity",
+                                action: "focusout->products#validateEmpty change->products#validateEmpty",
+                                products_quantity_param: "quantity",
+                                products_index_param: "2" 
+                              },
+                        class: "border-slate-800 focus:border-slate-800 focus:ring-0 rounded-lg"%>
+          <%= f.text_field  :product, 
+                            placeholder: "Product or service", 
+                            data: { products_target: "product" },
+                            class: "border-slate-800 focus:border-slate-800 focus:ring-0 rounded-lg" %>
+          <%= f.text_field  :unit_price,
+                            placeholder: "Unit price",
+                            data: { 
+                                    products_target: "unit_price",
+                                    action: "focusout->products#validateEmpty change->products#validateEmpty",
+                                    products_unit_price_param: "unit_price",
+                                    products_index_param: "2"  
+                                  },
+                            class: "border-slate-800 focus:border-slate-800 focus:ring-0 rounded-lg"%>
+          <%= f.text_field  :amount,
+                            placeholder: "Amount",
+                            data: {
+                                    products_target: "amount",
+                                    action: "focus->products#getAmount",
+                                    products_index_param: "2"
+                                  },
+                            class: "border-slate-800 focus:border-slate-800 focus:ring-0 rounded-lg"%>
+        </div>
+      <% end %> 
     <% end %>
 
-    <%= link_to "Cancel", "#{params["customer"]} "%>
-    <button type="submit" data-submit-target="createProduct">Create invoice</button>
+    <div class="text-center mt-6">
+      <button type="submit" data-submit-target="createProduct" class="bg-green-600 p-2 rounded-lg text-white">Create invoice</button>
+    </div>
+    <%= link_to "Cancel",
+                "#{params["customer"]} ",
+                class: "bg-slate-200 p-2 rounded-lg text-slate-700"%>
   <% end %>
 </div>
