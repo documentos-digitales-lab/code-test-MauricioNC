@@ -1,0 +1,75 @@
+<% unless products %>
+  <%= flash[:notice] %>
+<% else %>
+  
+  <% unless @products_amount_exceed.empty? %>
+    <p>Additional tax should be added</p>
+    <div>
+      <p>The next products exceeds the amount (grather than: $2000)</p>
+
+      <ul>
+        <% @products_amount_exceed.each do |p| %>
+          <li class="list-disc"><%= p %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="products flex flex-col justify-center">
+    <table class="text-center border-slate-400 border-2">
+      <thead class="bg-slate-600 text-white">
+        <tr>
+          <th colspan="4">Invoice breakdown</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-slate-300 text-slate-600">
+          <th>Quantity</th>
+          <th>Product</th>
+          <th>Unit price</th>
+          <th>Amount</th>
+        </tr>
+        <% products.each_with_index do |p, idx| %>
+          <% if idx.odd? %>
+            <tr class="bg-slate-200 text-slate-700 border-b-2 border-slate-400">
+              <td class="p-2 border-r-2 border-slate-400"><%= p.quantity %></td>
+              <td class="p-2 border-r-2 border-slate-400"><%= p.product %></td>
+              <td class="p-2 border-r-2 border-slate-400"><%= p.unit_price %></td>
+              <td class="p-2 border-r-2 border-slate-400"><%= p.amount %></td>
+            </tr>
+          <% else %>
+            <tr class="bg-white text-slate-700 border-b-2 border-slate-400">
+              <td class="p-2 border-r-2 border-slate-400"><%= p.quantity %></td>
+              <td class="p-2 border-r-2 border-slate-400"><%= p.product %></td>
+              <td class="p-2 border-r-2 border-slate-400"><%= p.unit_price %></td>
+              <td class="p-2 border-r-2 border-slate-400"><%= p.amount %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="invoice_breakdown mt-6 flex flex-col justify-center mb-8">
+    <table class="text-center border-slate-400 border-2">
+      <tbody>
+        <tr  class="bg-white text-slate-700 border-b-2 border-slate-400">
+          <td class="border-r-2 border-slate-400">Sub total</td>
+          <td class="p-2"><%= invoice.sub_total %></td>
+        </tr>
+        <tr  class="bg-white text-slate-700 border-b-2 border-slate-400">
+          <td class="border-r-2 border-slate-400">Tax</td>
+          <td class="p-2"><%= invoice.tax %></td>
+        </tr>
+        <tr class="bg-slate-200 text-slate-700 border-slate-400">
+          <td class="border-r-2 border-slate-400">Total</td>
+          <td class="p-2"><%= invoice.total %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <%= link_to "Close invoice",
+              params[:customer],
+              class: "bg-slate-200 text-slate-700 p-2 rounded-lg" %>
+<% end %>

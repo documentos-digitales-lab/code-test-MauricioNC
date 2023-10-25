@@ -1,4 +1,10 @@
+require 'json'
+
 class CustomersController < ApplicationController
+  before_action :set_random_customer, only: [:show]
+  include CustomersHelper
+
+
   def new
   end
 
@@ -14,5 +20,11 @@ class CustomersController < ApplicationController
   def update
     Customer.find(params[:id])
     redirect_to new_customer_path
+  end
+
+  private
+
+  def set_random_customer
+    @customer_credentials = JSON.parse(get_user(params[:id]))
   end
 end

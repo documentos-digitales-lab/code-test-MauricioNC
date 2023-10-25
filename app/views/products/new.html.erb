@@ -1,0 +1,7 @@
+<%= turbo_frame_tag @product do %>
+  <div class="p-4">
+    <p class="text-center mb-4 text-lg">Please add your products and click on Create:</p>
+
+    <%= render 'form', product: @product %>
+  </div>
+<% end %>
